@@ -13,5 +13,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: GagMirz/semver-action@v0.0.1
+      - uses: GagMirz/semver-action@master
 
