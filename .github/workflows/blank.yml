@@ -10,7 +10,4 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: GagMirz/semver-action/.github/workflows/release-update.yml@master
+    uses: GagMirz/semver-action/.github/workflows/release-update.yml@master
