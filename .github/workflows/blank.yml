@@ -13,5 +13,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: GagMirz/semver-action@master
+      - uses: GagMirz/semver-action@master/.github/workflows/release-update.yml
 
