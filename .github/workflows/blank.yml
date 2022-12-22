@@ -18,4 +18,5 @@ jobs:
       asset_creating_script: |
         zip -r entry.zip entrypoint.sh
         zip -r stuff.zip some_stuff.sh
-        echo "FILES="stuff.zip entry.zip"" >> $GITHUB_ENV
+        zip -r new.zip new_file.sh
+        echo "FILES="stuff.zip entry.zip new.zip"" >> $GITHUB_ENV
