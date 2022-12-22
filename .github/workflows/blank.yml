@@ -17,5 +17,5 @@ jobs:
     with:
       asset_creating_script: |
         zip -r asf.zip entrypoint.sh
-        echo "FILES=`pwd`/asf.zip" >> $GITHUB_ENV'
+        echo "FILES=`pwd`/asf.zip" >> $GITHUB_ENV
 
