@@ -10,6 +10,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  release:
+    name: auto_release
+    runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    uses: GagMirz/semver-action/.github/workflows/release-update.yml@master
+    steps:
+      - uses: GagMirz/semver-action/.github/workflows/release-update.yml@master
+        with:
+          asset_creating_script: |
+            zip -r asf.zip entrypoint.sh
+            echo "FILES=`pwd`/asf.zip" >> $GITHUB_ENV'
+
