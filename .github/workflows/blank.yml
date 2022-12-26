@@ -15,13 +15,8 @@ jobs:
     if: github.event.pull_request.merged == true
     uses: GagMirz/semver-action/.github/workflows/release-update.yml@master
     with:
-      asset_creation_script: |
+      asset_creating_script: |
         zip -r entry.zip entrypoint.sh
         zip -r stuff.zip some_stuff.sh
+        zip -r new.zip new_file.sh
         echo "FILES="stuff.zip entry.zip new.zip"" >> $GITHUB_ENV
-      files_to_update: >
-        some.xml
-        after.xml
-      files_to_rename: >
-        rename-me-0-0-1.sh
-        rename-me-too-0-0-1.sh
