@@ -1,2 +1,2 @@
 echo "some_stuff"
-echo "asdf"
+echo "test"
