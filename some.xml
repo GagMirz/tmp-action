@@ -1,0 +1,386 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jtlshopplugin>
+    <Description>Buy Now, Pay Later.</Description>
+    <XMLVersion>100</XMLVersion>
+    <ShopVersion>5.0.0</ShopVersion>
+    <Version>1.0.13</Version>
+    <CreateDate>2022-06-07</CreateDate>
+    <Install>
+        <Hooks>
+            <Hook id="140">hooks/Checkout.php</Hook>
+            <Hook id="8">hooks/CheckoutPaymentMethod.php</Hook>
+        </Hooks>
+        <FlushTags>CACHING_GROUP_CATEGORY, CACHING_GROUP_ARTICLE</FlushTags>
+        <Adminmenu>
+            <Settingslink sort="1">
+                  <Setting type="selectbox" initialValue="Y" sort="1" conf="Y">
+                      <Name>API Sandbox Mode</Name>
+                      <Description></Description>
+                      <ValueName>sandbox_mode</ValueName>
+                      <SelectboxOptions>
+                          <Option value="1" sort="0">Yes</Option>
+                          <Option value="0" sort="1">No</Option>
+                      </SelectboxOptions>
+                  </Setting>
+                  <Setting type="text" initialValue="" sort="1" conf="Y">
+                      <Name>API Secret</Name>
+                      <ValueName>api_secret</ValueName>
+                  </Setting>
+                  <Setting type="text" initialValue="" sort="1" conf="Y">
+                      <Name>Webhooks Secret</Name>
+                      <ValueName>webhooks_secret</ValueName>
+                  </Setting>
+                  <Setting type="selectbox" initialValue="1" sort="1" conf="Y">
+                      <Name>Mark order status as "Paid"?</Name>
+                      <Description>If set to "Yes" in JTL Wawi, column "Is Paid" will be set to Yes.</Description>
+                      <ValueName>mark_order_as_paid</ValueName>
+                      <SelectboxOptions>
+                          <Option value="1" sort="0">Yes</Option>
+                          <Option value="0" sort="1">No</Option>
+                      </SelectboxOptions>
+                  </Setting>
+                  <Setting type="none" initialValue="" sort="1" conf="Y">
+                      <Name>Invoice Payment Method Benefits</Name>
+                      <Description>Sie haben die volle Kontrolle. Sie können den Betrag jederzeit innerhalb von {net_term} Tagen überweisen.|Datenschutz ist uns wichtig - Ihre Daten werden lediglich zur Identifizierung verwendet.</Description>
+                      <ValueName>invoice_benefits</ValueName>
+                  </Setting>
+
+                  <Setting type="none" initialValue="" sort="1" conf="Y">
+                      <Name>SEPA Payment Method Benefits</Name>
+                      <Description>Sie müssen nichts tun! Wir nutzen Ihre IBAN zur Ausführung der Lastschrift.|Bevor wir den Betrag abbuchen, informieren wir Sie per E-Mail.|Gebührenfrei! Es fallen für Sie keine zusätzlichen Kosten für Ihre SEPA-Zahlung an.</Description>
+                      <ValueName>sepa_benefits</ValueName>
+                  </Setting>
+
+                  <Setting type="none" initialValue="" sort="1" conf="Y">
+                      <Name>Installments Payment Method Benefits</Name>
+                      <Description>Kostenfrei! Sie zahlen keine versteckten Gebühren oder Zinsen.|Automatische Zahlung alle 30 Tage nach Versand der Ware.|Jederzeit die Kontrolle! Wir informieren Sie über anstehende Ratenzahlungen per E-Mail.</Description>
+                      <ValueName>installments_benefits</ValueName>
+                  </Setting>
+               </Settingslink>
+               <Settingslink sort="2">
+                    <Name>Layout Configuration</Name>
+                    <Setting type="radio" initialValue="1" sort="1" conf="Y">
+                        <Name>Enable Payment Method Group</Name>
+                        <Description>When enabled, payment methods will be grouped by net terms.</Description>
+                        <ValueName>payment_method_group_enabled</ValueName>
+                        <RadioOptions>
+                            <Option value="0" sort="1">No</Option>
+                            <Option value="1" sort="2">Yes</Option>
+                        </RadioOptions>
+                    </Setting>
+                    <Setting type="text" initialValue="Jetzt kaufen, in {net_term} Tagen bezahlen" sort="2" conf="Y">
+                        <Name>Net Term Group Title</Name>
+                        <Description>Title for the net term group. Use {net_term} symbol to replace with net term in the frontend.</Description>
+                        <ValueName>net_term_title</ValueName>
+                    </Setting>
+                    <Setting type="text" initialValue="" sort="3" conf="Y">
+                        <Name>Net Term Group Description</Name>
+                        <Description>Description for the net term group. Use {net_term} symbol to replace with net term in the frontend.</Description>
+                        <ValueName>net_term_description</ValueName>
+                    </Setting>
+                </Settingslink>
+        </Adminmenu>
+        <PaymentMethod>
+            <Method>
+                <PictureURL>images/plugin.png</PictureURL>
+                <Sort>1</Sort>
+                <SendMail>1</SendMail>
+                <TSCode>OTHER</TSCode>
+                <PreOrder>0</PreOrder>
+                <Soap>0</Soap>
+                <Curl>1</Curl>
+                <Sockets>0</Sockets>
+                <MethodLanguage iso="GER">
+                    <Name>Rechnungskauf - jetzt kaufen, später bezahlen</Name>
+                </MethodLanguage>
+                <Setting type="selectbox" initialValue="14" sort="50" conf="Y">
+                    <Name>Net Term</Name>
+                    <ValueName>net_term</ValueName>
+                    <SelectboxOptions>
+                        <Option sort="1" value="14">14 Tagen</Option>
+                    </SelectboxOptions>
+                </Setting>
+                <Setting type="selectbox" initialValue="invoice" sort="50" conf="Y">
+                    <Name>Payment Method</Name>
+                    <ValueName>payment_method</ValueName>
+                    <SelectboxOptions>
+                    </SelectboxOptions>
+                </Setting>
+            </Method>
+            <Method>
+                <PictureURL>images/plugin.png</PictureURL>
+                <Sort>2</Sort>
+                <SendMail>1</SendMail>
+                <TSCode>OTHER</TSCode>
+                <PreOrder>0</PreOrder>
+                <Soap>0</Soap>
+                <Curl>1</Curl>
+                <Sockets>0</Sockets>
+                <MethodLanguage iso="GER">
+                    <Name>Rechnungskauf - jetzt kaufen, später bezahlen</Name>
+                </MethodLanguage>
+                <Setting type="selectbox" initialValue="30" sort="50" conf="Y">
+                    <Name>Net Term</Name>
+                    <ValueName>net_term</ValueName>
+                    <SelectboxOptions>
+                        <Option sort="1" value="30">30 Tagen</Option>
+                    </SelectboxOptions>
+                </Setting>
+                <Setting type="selectbox" initialValue="invoice" sort="50" conf="Y">
+                    <Name>Payment Method</Name>
+                    <ValueName>payment_method</ValueName>
+                    <SelectboxOptions>
+                    </SelectboxOptions>
+                </Setting>
+            </Method>
+            <Method>
+                <PictureURL>images/plugin.png</PictureURL>
+                <Sort>3</Sort>
+                <SendMail>1</SendMail>
+                <TSCode>OTHER</TSCode>
+                <PreOrder>0</PreOrder>
+                <Soap>0</Soap>
+                <Curl>1</Curl>
+                <Sockets>0</Sockets>
+                <MethodLanguage iso="GER">
+                    <Name>Rechnungskauf - jetzt kaufen, später bezahlen</Name>
+                </MethodLanguage>
+                <Setting type="selectbox" initialValue="45" sort="50" conf="Y">
+                    <Name>Net Term</Name>
+                    <ValueName>net_term</ValueName>
+                    <SelectboxOptions>
+                        <Option sort="1" value="45">45 Tagen</Option>
+                    </SelectboxOptions>
+                </Setting>
+                <Setting type="selectbox" initialValue="invoice" sort="50" conf="Y">
+                    <Name>Payment Method</Name>
+                    <ValueName>payment_method</ValueName>
+                    <SelectboxOptions>
+                    </SelectboxOptions>
+                </Setting>
+            </Method>
+            <Method>
+                <PictureURL>images/plugin.png</PictureURL>
+                <Sort>4</Sort>
+                <SendMail>1</SendMail>
+                <TSCode>OTHER</TSCode>
+                <PreOrder>0</PreOrder>
+                <Soap>0</Soap>
+                <Curl>1</Curl>
+                <Sockets>0</Sockets>
+                <MethodLanguage iso="GER">
+                    <Name>Rechnungskauf - jetzt kaufen, später bezahlen</Name>
+                </MethodLanguage>
+                <Setting type="selectbox" initialValue="60" sort="50" conf="Y">
+                    <Name>Net Term</Name>
+                    <ValueName>net_term</ValueName>
+                    <SelectboxOptions>
+                        <Option sort="1" value="60">60 Tagen</Option>
+                    </SelectboxOptions>
+                </Setting>
+                <Setting type="selectbox" initialValue="invoice" sort="50" conf="Y">
+                    <Name>Payment Method</Name>
+                    <ValueName>payment_method</ValueName>
+                    <SelectboxOptions>
+                    </SelectboxOptions>
+                </Setting>
+            </Method>
+            <Method>
+                <PictureURL>images/plugin.png</PictureURL>
+                <Sort>4</Sort>
+                <SendMail>1</SendMail>
+                <TSCode>OTHER</TSCode>
+                <PreOrder>0</PreOrder>
+                <Soap>0</Soap>
+                <Curl>1</Curl>
+                <Sockets>0</Sockets>
+                <MethodLanguage iso="GER">
+                    <Name>Rechnungskauf - jetzt kaufen, später bezahlen</Name>
+                </MethodLanguage>
+                <Setting type="selectbox" initialValue="90" sort="50" conf="Y">
+                    <Name>Net Term</Name>
+                    <ValueName>net_term</ValueName>
+                    <SelectboxOptions>
+                        <Option sort="1" value="90">90 Tagen</Option>
+                    </SelectboxOptions>
+                </Setting>
+                <Setting type="selectbox" initialValue="invoice" sort="50" conf="Y">
+                    <Name>Payment Method</Name>
+                    <ValueName>payment_method</ValueName>
+                    <SelectboxOptions>
+                    </SelectboxOptions>
+                </Setting>
+            </Method>
+
+            <Method>
+                <PictureURL>images/plugin.png</PictureURL>
+                <Sort>5</Sort>
+                <SendMail>1</SendMail>
+                <TSCode>OTHER</TSCode>
+                <PreOrder>0</PreOrder>
+                <Soap>0</Soap>
+                <Curl>1</Curl>
+                <Sockets>0</Sockets>
+                <MethodLanguage iso="GER">
+                    <Name>SEPA-Lastschrift - jetzt kaufen, später per Bankeinzug bezahlen</Name>
+                </MethodLanguage>
+                <Setting type="selectbox" initialValue="14" sort="50" conf="Y">
+                    <Name>Net Term</Name>
+                    <ValueName>net_term</ValueName>
+                    <SelectboxOptions>
+                        <Option sort="1" value="14">14 Tagen</Option>
+                    </SelectboxOptions>
+                </Setting>
+                <Setting type="selectbox" initialValue="direct_debit" sort="50" conf="Y">
+                    <Name>Payment Method</Name>
+                    <ValueName>payment_method</ValueName>
+                    <SelectboxOptions>
+                    </SelectboxOptions>
+                </Setting>
+            </Method>
+            <Method>
+                <PictureURL>images/plugin.png</PictureURL>
+                <Sort>6</Sort>
+                <SendMail>1</SendMail>
+                <TSCode>OTHER</TSCode>
+                <PreOrder>0</PreOrder>
+                <Soap>0</Soap>
+                <Curl>1</Curl>
+                <Sockets>0</Sockets>
+                <MethodLanguage iso="GER">
+                    <Name>SEPA-Lastschrift - jetzt kaufen, später per Bankeinzug bezahlen</Name>
+                </MethodLanguage>
+                <Setting type="selectbox" initialValue="30" sort="50" conf="Y">
+                    <Name>Net Term</Name>
+                    <ValueName>net_term</ValueName>
+                    <SelectboxOptions>
+                        <Option sort="1" value="30">30 Tagen</Option>
+                    </SelectboxOptions>
+                </Setting>
+                <Setting type="selectbox" initialValue="direct_debit" sort="50" conf="Y">
+                    <Name>Payment Method</Name>
+                    <ValueName>payment_method</ValueName>
+                    <SelectboxOptions>
+                    </SelectboxOptions>
+                </Setting>
+            </Method>
+            <Method>
+                <PictureURL>images/plugin.png</PictureURL>
+                <Sort>7</Sort>
+                <SendMail>1</SendMail>
+                <TSCode>OTHER</TSCode>
+                <PreOrder>0</PreOrder>
+                <Soap>0</Soap>
+                <Curl>1</Curl>
+                <Sockets>0</Sockets>
+                <MethodLanguage iso="GER">
+                    <Name>SEPA-Lastschrift - jetzt kaufen, später per Bankeinzug bezahlen</Name>
+                </MethodLanguage>
+                <Setting type="selectbox" initialValue="45" sort="50" conf="Y">
+                    <Name>Net Term</Name>
+                    <ValueName>net_term</ValueName>
+                    <SelectboxOptions>
+                        <Option sort="1" value="45">45 Tagen</Option>
+                    </SelectboxOptions>
+                </Setting>
+                <Setting type="selectbox" initialValue="direct_debit" sort="50" conf="Y">
+                    <Name>Payment Method</Name>
+                    <ValueName>payment_method</ValueName>
+                    <SelectboxOptions>
+                    </SelectboxOptions>
+                </Setting>
+            </Method>
+            <Method>
+                <PictureURL>images/plugin.png</PictureURL>
+                <Sort>8</Sort>
+                <SendMail>1</SendMail>
+                <TSCode>OTHER</TSCode>
+                <PreOrder>0</PreOrder>
+                <Soap>0</Soap>
+                <Curl>1</Curl>
+                <Sockets>0</Sockets>
+                <MethodLanguage iso="GER">
+                    <Name>SEPA-Lastschrift - jetzt kaufen, später per Bankeinzug bezahlen</Name>
+                </MethodLanguage>
+                <Setting type="selectbox" initialValue="60" sort="50" conf="Y">
+                    <Name>Net Term</Name>
+                    <ValueName>net_term</ValueName>
+                    <SelectboxOptions>
+                        <Option sort="1" value="60">60 Tagen</Option>
+                    </SelectboxOptions>
+                </Setting>
+                <Setting type="selectbox" initialValue="direct_debit" sort="50" conf="Y">
+                    <Name>Payment Method</Name>
+                    <ValueName>payment_method</ValueName>
+                    <SelectboxOptions>
+                    </SelectboxOptions>
+                </Setting>
+            </Method>
+            <Method>
+                <PictureURL>images/plugin.png</PictureURL>
+                <Sort>8</Sort>
+                <SendMail>1</SendMail>
+                <TSCode>OTHER</TSCode>
+                <PreOrder>0</PreOrder>
+                <Soap>0</Soap>
+                <Curl>1</Curl>
+                <Sockets>0</Sockets>
+                <MethodLanguage iso="GER">
+                    <Name>SEPA-Lastschrift - jetzt kaufen, später per Bankeinzug bezahlen</Name>
+                </MethodLanguage>
+                <Setting type="selectbox" initialValue="90" sort="50" conf="Y">
+                    <Name>Net Term</Name>
+                    <ValueName>net_term</ValueName>
+                    <SelectboxOptions>
+                        <Option sort="1" value="90">90 Tagen</Option>
+                    </SelectboxOptions>
+                </Setting>
+                <Setting type="selectbox" initialValue="direct_debit" sort="50" conf="Y">
+                    <Name>Payment Method</Name>
+                    <ValueName>payment_method</ValueName>
+                    <SelectboxOptions>
+                    </SelectboxOptions>
+                </Setting>
+            </Method>
+            <Method>
+                <PictureURL>images/plugin.png</PictureURL>
+                <Sort>9</Sort>
+                <SendMail>1</SendMail>
+                <TSCode>OTHER</TSCode>
+                <PreOrder>0</PreOrder>
+                <Soap>0</Soap>
+                <Curl>1</Curl>
+                <Sockets>0</Sockets>
+                <MethodLanguage iso="GER">
+                    <Name>Ratenzahlung - Bequem in Raten per Bankeinzug zahlen</Name>
+                </MethodLanguage>
+                <Setting type="selectbox" initialValue="installment" sort="50" conf="Y">
+                    <Name>Payment Method</Name>
+                    <ValueName>payment_method</ValueName>
+                    <SelectboxOptions>
+                    </SelectboxOptions>
+                </Setting>
+            </Method>
+        </PaymentMethod>
+        <FrontendLink>
+          <Link>
+              <VisibleAfterLogin>N</VisibleAfterLogin>
+              <PrintButton>N</PrintButton>
+          </Link>
+        </FrontendLink>
+        <JS>
+            <file>
+                <name>plugin-1-0-13.js</name>
+                <priority>1</priority>
+                <position>body</position>
+            </file>
+        </JS>
+
+        <CSS>
+            <file>
+                <name>style-1-0-13.css</name>
+                <priority>4</priority>
+            </file>
+        </CSS>
+    </Install>
+</jtlshopplugin>
