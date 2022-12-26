@@ -3,7 +3,7 @@
     <Description>Buy Now, Pay Later.</Description>
     <XMLVersion>100</XMLVersion>
     <ShopVersion>5.0.0</ShopVersion>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <CreateDate>2022-06-07</CreateDate>
     <Install>
         <Hooks>
