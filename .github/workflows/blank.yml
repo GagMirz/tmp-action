@@ -45,9 +45,3 @@ jobs:
 
         zip -r asdf.zip ./*
         echo "FILES="asdf.zip"" >> $GITHUB_ENV
-      files_to_update: >
-        some.xml
-        after.xml
-      files_to_rename: >
-        rename-me.sh
-        rename-me-too.sh
