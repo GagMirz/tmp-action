@@ -33,8 +33,8 @@ jobs:
 
         git commit -m "Updated xml"
         git push origin ${{ github.event.repository.default_branch }}
-        git config user.name ${{ github.event.pull_request.user.name }}
-        git config user.email ${{ github.event.pull_request.user.email }}
+        git config user.name github-actions
+        git config user.email github-actions@github.com
 
         for old_name in $files_to_rename; do
           echo "Renaming and adding semver to $old_name"
