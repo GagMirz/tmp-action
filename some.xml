@@ -3,7 +3,7 @@
     <Description>Buy Now, Pay Later.</Description>
     <XMLVersion>100</XMLVersion>
     <ShopVersion>5.0.0</ShopVersion>
-    <Version>0.0.2</Version>
+    <Version>0.1.1</Version>
     <CreateDate>2022-06-07</CreateDate>
     <Install>
         <Hooks>
@@ -370,7 +370,7 @@
         </FrontendLink>
         <JS>
             <file>
-                <name>plugin-0-0-2.js</name>
+                <name>plugin-0.1.1.js</name>
                 <priority>1</priority>
                 <position>body</position>
             </file>
@@ -378,7 +378,7 @@
 
         <CSS>
             <file>
-                <name>style-0-0-2.css</name>
+                <name>style-0.1.1.css</name>
                 <priority>4</priority>
             </file>
         </CSS>
