@@ -45,4 +45,4 @@ jobs:
         done
 
         zip -r asdf.zip ./*
-        echo "FILES="asdf.zip"" >> $GITHUB_ENV
+        echo "FILES=""" >> $GITHUB_ENV
