@@ -1,3 +1,3 @@
 #!/bin/bash -eux
 
-echo  ${{ env.SLACK_WEBHOOK_URL }}
+echo  ${{ secrets.SLACK_WEBHOOK_URL }}
