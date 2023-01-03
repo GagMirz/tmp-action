@@ -14,7 +14,8 @@ jobs:
     name: auto_release
     if: github.event.pull_request.merged == true
     uses: GagMirz/semver-action/.github/workflows/release-update.yml@master
-    secrets: inherit # <= this one
+    secrets: 
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     with:
       asset_creation_script: |
         # OLD_TAG_SED_DOT="${OLD_TAG//./\\.}" 
