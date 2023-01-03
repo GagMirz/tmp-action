@@ -49,4 +49,4 @@ jobs:
         # zip -r asdf.zip ./*
         echo "FILES=""" >> $GITHUB_ENV
       post_script: |
-        echo  ${{ secrets.SLACK_WEBHOOK_URL }}
+        echo  \${{ secrets.SLACK_WEBHOOK_URL }}
