@@ -15,8 +15,6 @@ jobs:
     if: github.event.pull_request.merged == true
     uses: GagMirz/semver-action/.github/workflows/release-update.yml@master
     secrets: inherit
-    env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     with:
       asset_creation_script: |
         # OLD_TAG_SED_DOT="${OLD_TAG//./\\.}" 
@@ -49,5 +47,3 @@ jobs:
 
         # zip -r asdf.zip ./*
         echo "FILES=""" >> $GITHUB_ENV
-      post_script: |
-        'echo  ${{ env.SLACK_WEBHOOK_URL }}'
