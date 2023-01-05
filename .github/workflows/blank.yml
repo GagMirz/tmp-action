@@ -4,6 +4,8 @@ on:
   pull_request:
     types:
     - closed
+    - opened
+    - synchronize
     branches: 
     - master
 
@@ -12,10 +14,10 @@ on:
 jobs:
   release:
     name: auto_release
-    if: github.event.pull_request.merged == true
     uses: GagMirz/semver-action/.github/workflows/release-update.yml@master
     secrets: inherit
     with:
       asset_creation_script: |
-
-        echo "FILES=""" >> $GITHUB_ENV
+        touch a.sh
+        touch b.sh
+        echo "FILES="a.sh b.sh"" >> $GITHUB_ENV
